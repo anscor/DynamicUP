@@ -3,7 +3,7 @@
 '''
 @Author: Anscor
 @LastEditors: Anscor
-@Description: 动态卡片类，包含动态的av号、名称、描述、时间、UP主、封面链接6类信息。
+@Description: 动态卡片类，包含动态的av号、名称、描述、动态ID、UP主、封面链接6类信息。
 @Date: 2019-02-21
 @LastEditTime: 2019-02-23
 '''
@@ -18,7 +18,7 @@ class Card:
         self.title = title
         self.cover = cover
 
-    # 比较函数，用于排序（根据时间）
+    # 比较函数，用于排序（根据动态ID）
     def __lt__(self, other):
         return self.dynamic_id < other.dynamic_id
 

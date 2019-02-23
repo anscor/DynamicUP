@@ -79,7 +79,7 @@ def ListUpdate():
                     desc=desc, dynamic_id=dynamic_id, cover=cover)
         cards.append(card)
 
-    # 将获取的动态按时间进行升序排序
+    # 将获取的动态按动态ID进行升序排序
     cards = sorted(cards)
 
     # 获取最新一次更新的信息
