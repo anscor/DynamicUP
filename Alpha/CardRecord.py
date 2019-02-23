@@ -5,7 +5,7 @@
 @LastEditors: Anscor
 @Description: 记录最近一次更新的信息（按更新时间升序）
 @Date: 2019-02-21
-@LastEditTime: 2019-02-22
+@LastEditTime: 2019-02-23
 '''
 
 
@@ -16,7 +16,7 @@ import json
 import copy
 
 __Card = Card.Card(av="-1", uname="", title="",
-                   desc="", citme="-1", cover="")
+                   desc="", dynamic_id="-1", cover="")
 
 
 # 从本地文件中读取最近一次更新的信息
@@ -27,7 +27,7 @@ __Card.av = int(c["av"])
 __Card.uname = c["uname"]
 __Card.title = c["title"]
 __Card.desc = c["desc"]
-__Card.ctime = int(c["ctime"])
+__Card.dynamic_id = int(c["dynamic_id"])
 __Card.cover = c["cover"]
 
 
@@ -42,7 +42,7 @@ def SetLastCard(card):
     __Card.uname = card.uname
     __Card.title = card.title
     __Card.desc = card.desc
-    __Card.ctime = card.ctime
+    __Card.dynamic_id = card.dynamic_id
     __Card.cover = card.cover
     __Record()
 
@@ -54,7 +54,7 @@ def __Record():
     c["uname"] = __Card.uname
     c["title"] = __Card.title
     c["desc"] = __Card.desc
-    c["ctime"] = __Card.ctime
+    c["dynamic_id"] = __Card.dynamic_id
     c["cover"] = __Card.cover
     f = codecs.open("./LastCard.json", "w", "utf-8")
     json.dump(c, f)

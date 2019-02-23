@@ -5,7 +5,7 @@
 @LastEditors: Anscor
 @Description: 获取动态并对动态进行处理，提取其中需要信息，将其转换为list结构并返回
 @Date: 2019-02-21
-@LastEditTime: 2019-02-21
+@LastEditTime: 2019-02-23
 '''
 
 
@@ -39,19 +39,19 @@ def __GetOriginalDynamic():
             f.write(dynamic)
         f.close()
         print("成功获取到动态")
-    else:
-        return dynamic
+    return dynamic
 
 
 def ListUpdate():
-    if config.DEBUG == True:
-        # 读入动态信息
-        f = open("./dynamic.json", "r", encoding="utf-8")
-        # 将json转换成字典
-        jsonData = json.load(f)
-        f.close()
-    else:
-        jsonData = json.loads(__GetOriginalDynamic())
+    # if config.DEBUG == True:
+    #     # 读入动态信息
+    #     f = open("./dynamic.json", "r", encoding="utf-8")
+    #     # 将json转换成字典
+    #     jsonData = json.load(f)
+    #     f.close()
+    # else:
+    #     jsonData = json.loads(__GetOriginalDynamic())
+    jsonData = json.loads(__GetOriginalDynamic())
 
     cards = []
     if jsonData["code"] != 0:
@@ -62,12 +62,12 @@ def ListUpdate():
     for dynamic in dynamics:
         # av号
         av = dynamic["desc"]["rid"]
+        # 动态ID
+        dynamic_id = dynamic["desc"]["dynamic_id"]
         # UP主
         uname = dynamic["desc"]["user_profile"]["info"]["uname"]
 
         d = json.loads(dynamic["card"])
-        # 更新时间
-        ctime = d["ctime"]
         # 标题
         title = d["title"]
         # 描述
@@ -76,7 +76,7 @@ def ListUpdate():
         cover = d["pic"]
 
         card = Card.Card(av=av, uname=uname, title=title,
-                    desc=desc, citme=ctime, cover=cover)
+                    desc=desc, dynamic_id=dynamic_id, cover=cover)
         cards.append(card)
 
     # 将获取的动态按时间进行升序排序
@@ -97,7 +97,7 @@ def ListUpdate():
     # 设置最新一次更新
     CardRecord.SetLastCard(cards[len(cards) - 1])
 
-    if last.ctime == -1 or i == len(cards):
+    if last.dynamic_id == -1 or i == len(cards):
         cards = []
     else:
         cards = cards[i:]
