@@ -9,8 +9,6 @@
 '''
 
 
-import Cookie
-
 # 调试
 DEBUG = False
 
