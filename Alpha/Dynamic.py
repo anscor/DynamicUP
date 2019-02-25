@@ -5,13 +5,13 @@
 @LastEditors: Anscor
 @Description: 获取动态并对动态进行处理，提取其中需要信息，将其转换为list结构并返回
 @Date: 2019-02-21
-@LastEditTime: 2019-02-23
+@LastEditTime: 2019-02-25
 '''
 
 
 import json
 import Card
-import config
+import Config
 import CardRecord
 
 import requests
@@ -20,20 +20,20 @@ import requests
 def __GetOriginalDynamic():
 
     # 设置url
-    url = config.URL
+    url = Config.URL
 
     # 设置Cookie
-    cookies = config.COOKIE
+    cookies = Config.COOKIE
 
     # 设置请求头
-    headers = config.HEADERS
+    headers = Config.HEADERS
 
     # 请求动态
     req = requests.get(url=url, cookies=cookies, headers=headers)
     req.encoding = "utf-8"
     dynamic = req.text
 
-    if config.DEBUG == True:
+    if Config.DEBUG == True:
         # 将返回的动态信息（json格式）写入文件
         with open("./dynamic.json", "w", encoding="utf-8") as f:
             f.write(dynamic)
@@ -43,7 +43,7 @@ def __GetOriginalDynamic():
 
 
 def ListUpdate():
-    # if config.DEBUG == True:
+    # if Config.DEBUG == True:
     #     # 读入动态信息
     #     f = open("./dynamic.json", "r", encoding="utf-8")
     #     # 将json转换成字典

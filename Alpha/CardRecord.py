@@ -5,7 +5,7 @@
 @LastEditors: Anscor
 @Description: 记录最近一次更新的信息（按动态ID升序）
 @Date: 2019-02-21
-@LastEditTime: 2019-02-23
+@LastEditTime: 2019-02-25
 '''
 
 
@@ -14,25 +14,28 @@ import Card
 import codecs
 import json
 import copy
+import os
 
 __Card = Card.Card(av="-1", uname="", title="",
                    desc="", dynamic_id="-1", cover="")
 
 
-# 从本地文件中读取最近一次更新的信息
-f = codecs.open("./LastCard.json", "r", "utf-8")
-c = json.load(f)
-f.close()
-__Card.av = int(c["av"])
-__Card.uname = c["uname"]
-__Card.title = c["title"]
-__Card.desc = c["desc"]
-__Card.dynamic_id = int(c["dynamic_id"])
-__Card.cover = c["cover"]
+def __LoadCard():
+    # 从本地文件中读取最近一次更新的信息
+    f = codecs.open("./LastCard.json", "r", "utf-8")
+    c = json.load(f)
+    f.close()
+    __Card.av = int(c["av"])
+    __Card.uname = c["uname"]
+    __Card.title = c["title"]
+    __Card.desc = c["desc"]
+    __Card.dynamic_id = int(c["dynamic_id"])
+    __Card.cover = c["cover"]
 
 
 # 获取最近一次更新的信息
 def GetLastCard():
+    __LoadCard()
     return copy.deepcopy(__Card)
 
 

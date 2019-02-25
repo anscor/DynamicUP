@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 '''
 @Author: Sion10032
-@LastEditors: Sion10032
+@LastEditors: Anscor
 @Description: 渲染邮件html页面
 @Date: 2019-02-25
 @LastEditTime: 2019-02-25
@@ -52,8 +52,3 @@ class PageRenderer:
         vi = vi.replace('{ VideoDescription }', card.desc.replace('\n', '<br />'))
 
         return vi
-
-if __name__ == '__main__':
-    cs = Dynamic.ListUpdate()
-    pr = PageRenderer()
-    print(pr.Render(cs))
