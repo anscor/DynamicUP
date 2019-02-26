@@ -5,7 +5,7 @@
 @LastEditors: Anscor
 @Description: 邮件发送
 @Date: 2019-02-21
-@LastEditTime: 2019-02-25
+@LastEditTime: 2019-02-26
 '''
 
 
@@ -46,12 +46,12 @@ def Send():
         if sbj.find(card.uname) == -1:
             sbj = sbj + ' ' + card.uname
 
-    page = PageRenderer()
+    page = PageRenderer.PageRenderer()
 
     # 构建发送内容与头部
     msg = MIMEText(page.Render(cards), "html", "utf-8")
-    msg['From'] = __format_addr("BilibiliUP<xlyAnge1@163.com>")
-    msg['To'] = __format_addr("Anscor<xlyanscor@outlook.com>")
+    msg['From'] = __format_addr(Config.FROM_ADDR)
+    msg['To'] = __format_addr(Config.TO_ADDR)
     msg['Subject'] = Header(sbj, "utf-8").encode()
 
     # 发送
